@@ -82,18 +82,16 @@
       - jenkins-run.sh
       - supervisord-run.sh
 
-  - name: create api_supervisor job
+  - name: install api_supervisor service
     copy:
-      src: api_supervisor.conf
-      dest: /etc/supervisord.conf.d/api_supervisor.conf
+      src: api_supervisor.service
+      dest: /etc/systemd/system/api_supervisor.service
+      owner: root
+      group: root
       mode: 0644
 
-  - name: reload api_supervisord job
-    supervisorctl:
-      name: api_supervisor
-      state: present
-
   - name: ensure the api supervisor is started
-    supervisorctl:
+    service:
       name: api_supervisor
       state: started
+      enabled: true

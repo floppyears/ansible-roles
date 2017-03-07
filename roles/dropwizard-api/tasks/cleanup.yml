@@ -1,0 +1,5 @@
+---
+  - name: remove api_supervisor job, if present
+    file:
+      name: /etc/supervisord.conf.d/api_supervisor.conf
+      state: absent

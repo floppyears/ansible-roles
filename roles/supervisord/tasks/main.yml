@@ -17,18 +17,6 @@
     state: present
     version: 3.3
 
-- name: install supervisord init script
-  copy:
-    src: supervisord
-    dest: /etc/rc.d/init.d/supervisord
-    mode: 0755
-
-- name: install supervisord config
-  template:
-    src: supervisord.conf.j2
-    dest: /etc/supervisord.conf
-  notify: restart supervisord
-
 - name: create supervisord service dir
   file:
     name: /etc/supervisord.conf.d
@@ -41,8 +29,8 @@
     state: directory
     mode: 0700
 
-- name: ensure supervisord is running and enabled
-  service:
-    name: supervisord
-    state: started
-    enabled: yes
+#- name: ensure supervisord is running and enabled
+#  service:
+#    name: supervisord
+#    state: started
+#    enabled: yes

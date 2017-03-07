@@ -1,0 +1,17 @@
+[Unit]
+Description=api_supervisor - Supervisor for Dropwizard APIs
+After=network.target
+
+[Service]
+Type=simple
+PidFile=/apis/supervisor/supervisor.pid
+ExecStart=/usr/bin/supervisord -c /apis/supervisor/supervisord.conf
+ExecReload=/usr/bin/supervisorctl -c /apis/supervisor/supervisord.conf reload
+ExecStop=/usr/bin/supervisorctl -c /apis/supervisor/supervisord.conf shutdown
+WorkingDirectory=/apis/supervisor
+User=osu_apis
+Group=apis
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
